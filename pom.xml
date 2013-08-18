@@ -110,6 +110,15 @@ limitations under the License.
         <version>6.1.26</version>
         <configuration>
           <contextPath>/</contextPath>
+          <connectors>
+            <connector implementation="org.mortbay.jetty.security.SslSocketConnector">
+              <port>80</port>
+              <maxIdleTime>60000</maxIdleTime>
+              <keystore>/home/ubuntu/keystore.jks</keystore>
+              <password>hackathon</password>
+              <keyPassword>hackathon</keyPassword>
+            </connector>
+          </connectors>
         </configuration>
       </plugin>
       <plugin>
