@@ -88,7 +88,7 @@ limitations under the License.
 
       <% if (timelineItems != null && !timelineItems.isEmpty()) {
         for (TimelineItem timelineItem : timelineItems) { %>
-      <div class="span4">
+      <div class="span3">
         <table class="table table-bordered">
           <tbody>
             <tr>
@@ -156,20 +156,13 @@ limitations under the License.
   <hr/>
 
   <div class="row">
-    <div class="span4">
-      <h2>Timeline</h2>
-
-      <p>When you first sign in, this Glassware inserts a welcome message. Use
-        these controls to insert more items into your timeline. Learn more about
-        the timeline APIs
-        <a href="https://developers.google.com/glass/timeline">here</a>.</p>
-
+    <div class="span12">
 
       <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
         <input type="hidden" name="operation" value="insertItem">
-        <textarea class="span4" name="message">Hello World!</textarea><br/>
-        <button class="btn btn-block" type="submit">
-          Insert the above message
+        <input class="span6" type="text" name="message">
+        <button type="submit">
+          Transmit Task
         </button>
       </form>
 
