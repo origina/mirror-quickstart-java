@@ -81,7 +81,7 @@ limitations under the License.
   <div class="alert alert-info"><%= StringEscapeUtils.escapeHtml4(flash) %></div>
   <% } %>
 
-  <h1>Your Recent Timeline</h1>
+  <h1>Latest</h1>
   <div class="row">
 
     <div style="margin-top: 5px;">
@@ -153,41 +153,18 @@ limitations under the License.
     <div style="clear:both;"></div>
   </div>
 
-  <hr/>
 
   <div class="row">
     <div class="span12">
 
       <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
         <input type="hidden" name="operation" value="insertItem">
+          <img src="<%= appBaseUrl +
+               "static/images/BattalionChief.png" %>">
         <input class="span6" type="text" name="message">
         <button type="submit">
           Transmit Task
         </button>
-      </form>
-
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertItem">
-        <input type="hidden" name="message" value="Chipotle says 'hi'!">
-        <input type="hidden" name="imageUrl" value="<%= appBaseUrl +
-               "static/images/chipotle-tube-640x360.jpg" %>">
-        <input type="hidden" name="contentType" value="image/jpeg">
-
-        <button class="btn btn-block" type="submit">Insert a picture
-          <img class="button-icon" src="<%= appBaseUrl +
-               "static/images/chipotle-tube-640x360.jpg" %>">
-        </button>
-      </form>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertItemWithAction">
-        <button class="btn btn-block" type="submit">
-          Insert a card you can reply to</button>
-      </form>
-      <hr>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertItemAllUsers">
-        <button class="btn btn-block" type="submit">
-          Insert a card to all users</button>
       </form>
     </div>
   </div>
