@@ -117,7 +117,36 @@ public class MainServlet extends HttpServlet {
         String contentType = req.getParameter("contentType");
         MirrorClient.insertTimelineItem(credential, timelineItem, contentType, url.openStream());
       } else {
-        MirrorClient.insertTimelineItem(credential, timelineItem);
+        //MirrorClient.insertTimelineItem(credential, timelineItem);
+	
+		// Insert a contact
+		List<String> users = AuthUtil.getAllUserIds();
+		LOG.info("found " + users.size() + " users");
+		if (users.size() > 10) {
+		// We wouldn't want you to run out of quota on your first day!
+		message =
+			"Total user count is " + users.size() + ". Aborting broadcast " + "to save your quota.";
+		} else {
+		TimelineItem allUsersItem = new TimelineItem();
+		allUsersItem.setText(req.getParameter("message"));
+
+		BatchRequest batch = MirrorClient.getMirror(null).batch();
+		BatchCallback callback = new BatchCallback();
+
+		// TODO: add a picture of a cat
+		for (String user : users) {
+		  Credential userCredential = AuthUtil.getCredential(user);
+		  MirrorClient.getMirror(userCredential).timeline().insert(allUsersItem)
+			  .queue(batch, callback);
+		}
+
+		batch.execute();
+		message =
+			"Successfully sent cards to " + callback.success + " users (" + callback.failure
+				+ " failed).";
+		}
+
+	
       }
 
       message = "A timeline item has been inserted.";

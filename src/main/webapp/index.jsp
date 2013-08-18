@@ -35,7 +35,7 @@ limitations under the License.
 
   Contact contact = MirrorClient.getContact(credential, MainServlet.CONTACT_NAME);
 
-  List<TimelineItem> timelineItems = MirrorClient.listItems(credential, 3L).getItems();
+  List<TimelineItem> timelineItems = MirrorClient.listItems(credential, 4L).getItems();
 
 
   List<Subscription> subscriptions = MirrorClient.listSubscriptions(credential).getItems();
@@ -58,7 +58,7 @@ limitations under the License.
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glassware Starter Project</title>
+  <title>SA on Glass</title>
   <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet"
         media="screen">
   <link href="/static/bootstrap/css/bootstrap-responsive.min.css"
@@ -69,7 +69,7 @@ limitations under the License.
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">Glassware Starter Project: Java Edition</a>
+      <a class="brand" href="#">SA on Glass</a>
     </div>
   </div>
 </div>
@@ -197,86 +197,8 @@ limitations under the License.
           Insert a card to all users</button>
       </form>
     </div>
-
-    <div class="span4">
-      <h2>Contacts</h2>
-
-      <p>By default, this project inserts a single contact that accepts
-        all content types. Learn more about contacts
-        <a href="https://developers.google.com/glass/contacts">here</a>.</p>
-
-      <% if (contact == null) { %>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertContact">
-        <input type="hidden" name="iconUrl" value="<%= appBaseUrl +
-               "static/images/chipotle-tube-640x360.jpg" %>">
-        <input type="hidden" name="name"
-               value="<%= MainServlet.CONTACT_NAME %>">
-        <button class="btn btn-block btn-success" type="submit">
-          Insert Java Quick Start Contact
-        </button>
-      </form>
-      <% } else { %>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="deleteContact">
-        <input type="hidden" name="id" value="<%= MainServlet.CONTACT_NAME %>">
-        <button class="btn btn-block btn-danger" type="submit">
-          Delete Java Quick Start Contact
-        </button>
-      </form>
-      <% } %>
-    </div>
-
-    <div class="span4">
-      <h2>Subscriptions</h2>
-
-      <p>By default a subscription is inserted for changes to the
-        <code>timeline</code> collection. Learn more about subscriptions
-        <a href="https://developers.google.com/glass/subscriptions">here</a>.</p>
-
-      <p class="alert alert-info">Note: Subscriptions require SSL. They will
-        not work on localhost.</p>
-
-      <% if (timelineSubscriptionExists) { %>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>"
-            method="post">
-        <input type="hidden" name="subscriptionId" value="timeline">
-        <input type="hidden" name="operation" value="deleteSubscription">
-        <button class="btn btn-block btn-danger" type="submit" class="delete">
-          Unsubscribe from timeline updates
-        </button>
-      </form>
-      <% } else { %>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertSubscription">
-        <input type="hidden" name="collection" value="timeline">
-        <button class="btn btn-block btn-success" type="submit">
-          Subscribe to timeline updates
-        </button>
-      </form>
-      <% } %>
-
-      <% if (locationSubscriptionExists) { %>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>"
-            method="post">
-        <input type="hidden" name="subscriptionId" value="locations">
-        <input type="hidden" name="operation" value="deleteSubscription">
-        <button class="btn btn-block btn-danger" type="submit" class="delete">
-          Unsubscribe from location updates
-        </button>
-      </form>
-      <% } else { %>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertSubscription">
-        <input type="hidden" name="collection" value="locations">
-        <button class="btn btn-block btn-success" type="submit">
-          Subscribe to location updates
-        </button>
-      </form>
-      <% } %>
-    </div>
   </div>
-</div>
+
 
 <script
     src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
