@@ -98,7 +98,7 @@ limitations under the License.
 
       <% if (timelineItems != null && !timelineItems.isEmpty()) {
         for (TimelineItem timelineItem : timelineItems) { %>
-      <div class="span3">
+      <div class="span6">
         <table class="table table-bordered">
           <tbody>
             <tr>
@@ -162,7 +162,7 @@ limitations under the License.
     </div>
     <div style="clear:both;"></div>
   </div>
-  <img class = "span6" src="<%= appBaseUrl +
+  <img class = "span12" src="<%= appBaseUrl +
 	   "static/images/BattalionChiefBottomMap.png" %>">
 <script
     src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
