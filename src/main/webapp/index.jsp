@@ -81,6 +81,21 @@ limitations under the License.
   <div class="alert alert-info"><%= StringEscapeUtils.escapeHtml4(flash) %></div>
   <% } %>
 
+  <div class="row">
+    <div class="span12">
+
+      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
+        <input type="hidden" name="operation" value="insertItem">
+          <img width="100" src="<%= appBaseUrl +
+               "static/images/BattalionChief.png" %>">
+        <input class="span6" type="text" name="message">
+        <button type="submit">
+          Transmit Task
+        </button>
+      </form>
+    </div>
+  </div>
+
   <h1>Latest</h1>
   <div class="row">
 
@@ -152,24 +167,8 @@ limitations under the License.
     </div>
     <div style="clear:both;"></div>
   </div>
-
-
-  <div class="row">
-    <div class="span12">
-
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertItem">
-          <img src="<%= appBaseUrl +
-               "static/images/BattalionChief.png" %>">
-        <input class="span6" type="text" name="message">
-        <button type="submit">
-          Transmit Task
-        </button>
-      </form>
-    </div>
-  </div>
-
-
+  <img class = "span6" src="<%= appBaseUrl +
+	   "static/images/BattalionChiefBottomMap.png" %>">
 <script
     src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
