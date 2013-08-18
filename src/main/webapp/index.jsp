@@ -23,6 +23,7 @@ limitations under the License.
 <%@ page import="com.google.api.services.mirror.model.Attachment" %>
 <%@ page import="com.google.glassware.MainServlet" %>
 <%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
+<%@ page import="java.util.List" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -76,36 +77,43 @@ limitations under the License.
 
 <div class="container">
 
-  <% String flash = WebUtil.getClearFlash(request);
-    if (flash != null) { %>
-  <div class="alert alert-info"><%= StringEscapeUtils.escapeHtml4(flash) %></div>
-  <% } %>
+  <div class="row">
+    <div class="span12">
 
-  <h1>Your Recent Timeline</h1>
+      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
+        <input type="hidden" name="operation" value="insertItem">
+          <img width="100" src="<%= appBaseUrl +
+               "static/images/BattalionChief.png" %>">
+        <input class="span6" type="text" name="message">
+        <button type="submit">
+          Transmit Task
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <h1>Squad Team</h1>
   <div class="row">
 
     <div style="margin-top: 5px;">
 
       <% if (timelineItems != null && !timelineItems.isEmpty()) {
+	    int n = 0;
+		String[] teamImgs = {"Engine2Captain.png", "EngineCaptain1.png", "FirefighterImage.png", "EMSChief.png"};
+		String[] titles = {"Engine #1 Captain", "Engine #2 Captain", "Fire Fighter Lieutenant", "EMS Team Leader.png"};
         for (TimelineItem timelineItem : timelineItems) { %>
-      <div class="span3">
+      <div class="span6">
         <table class="table table-bordered">
           <tbody>
             <tr>
-              <th>ID</th>
-              <td><%= timelineItem.getId() %></td>
+			<td>
+          <img class = "span1" width="50" src="<%= appBaseUrl +
+               "static/images/" + teamImgs[n]%>"></td>
+              <td><%= titles[n]%><br><%= timelineItem.getCreated()%></td>
             </tr>
             <tr>
-              <th>Text</th>
-              <td><%= StringEscapeUtils.escapeHtml4(timelineItem.getText()) %></td>
-            </tr>
-            <tr>
-              <th>HTML</th>
-              <td><%= StringEscapeUtils.escapeHtml4(timelineItem.getHtml()) %></td>
-            </tr>
-            <tr>
-              <th>Attachments</th>
-              <td>
+               <td colspan="2">
+                <%= StringEscapeUtils.escapeHtml4(timelineItem.getText()) %><br>
                 <%
                 if (timelineItem.getAttachments() != null) {
                   for (Attachment attachment : timelineItem.getAttachments()) {
@@ -119,25 +127,11 @@ limitations under the License.
                 <%  }
                   }
                 } else { %>
-                <span class="muted">None</span>
-                <% } %>
+                <span class="muted">No Pictures</span>
+                <% n = n+1;} %>
               </td>
             </tr>
-            <tr>
-              <td colspan="2">
-                <form class="form-inline"
-                      action="<%= WebUtil.buildUrl(request, "/main") %>"
-                      method="post">
-                  <input type="hidden" name="itemId"
-                         value="<%= timelineItem.getId() %>">
-                  <input type="hidden" name="operation"
-                         value="deleteTimelineItem">
-                  <button class="btn btn-block btn-danger"
-                          type="submit">Delete</button>
-                </form>
-              </td>
-            </tr>
-          </tbody>
+			</tbody>
         </table>
       </div>
       <% }
@@ -152,47 +146,8 @@ limitations under the License.
     </div>
     <div style="clear:both;"></div>
   </div>
-
-  <hr/>
-
-  <div class="row">
-    <div class="span12">
-
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertItem">
-        <input class="span6" type="text" name="message">
-        <button type="submit">
-          Transmit Task
-        </button>
-      </form>
-
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertItem">
-        <input type="hidden" name="message" value="Chipotle says 'hi'!">
-        <input type="hidden" name="imageUrl" value="<%= appBaseUrl +
-               "static/images/chipotle-tube-640x360.jpg" %>">
-        <input type="hidden" name="contentType" value="image/jpeg">
-
-        <button class="btn btn-block" type="submit">Insert a picture
-          <img class="button-icon" src="<%= appBaseUrl +
-               "static/images/chipotle-tube-640x360.jpg" %>">
-        </button>
-      </form>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertItemWithAction">
-        <button class="btn btn-block" type="submit">
-          Insert a card you can reply to</button>
-      </form>
-      <hr>
-      <form action="<%= WebUtil.buildUrl(request, "/main") %>" method="post">
-        <input type="hidden" name="operation" value="insertItemAllUsers">
-        <button class="btn btn-block" type="submit">
-          Insert a card to all users</button>
-      </form>
-    </div>
-  </div>
-
-
+  <img class = "span12" src="<%= appBaseUrl +
+	   "static/images/BattalionChiefBottomMap.png" %>">
 <script
     src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
