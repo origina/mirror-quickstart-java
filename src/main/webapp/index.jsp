@@ -76,11 +76,6 @@ limitations under the License.
 
 <div class="container">
 
-  <% String flash = WebUtil.getClearFlash(request);
-    if (flash != null) { %>
-  <div class="alert alert-info"><%= StringEscapeUtils.escapeHtml4(flash) %></div>
-  <% } %>
-
   <div class="row">
     <div class="span12">
 
